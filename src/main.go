@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"net/http"
 
+	"github.com/mjjurkoic/marathonr/src/event"
 	"nhooyr.io/websocket"
 )
 
@@ -16,8 +17,10 @@ func handleMessage(msg []interface{}) (err error) {
 
 	switch msgVerb {
 	case "EVENT":
-		// TODO
-		break
+		err := event.HandleEvent(msg)
+		if err != nil {
+			return err
+		}
 	case "REQ":
 		// TODO
 		break
